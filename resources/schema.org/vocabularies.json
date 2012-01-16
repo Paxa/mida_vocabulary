@@ -639,6 +639,11 @@
     ],
     "vocabularies": [
       "Thing"
+    ],
+    "instances": [
+      "EBook",
+      "Hardcover",
+      "Paperback"
     ]
   },
   {
@@ -2559,6 +2564,14 @@
     ],
     "vocabularies": [
       "Thing"
+    ],
+    "instances": [
+      "Discontinued",
+      "InStock",
+      "InStoreOnly",
+      "OnlineOnly",
+      "OutOfStock",
+      "PreOrder"
     ]
   },
   {
@@ -3864,6 +3877,12 @@
     ],
     "vocabularies": [
       "Thing"
+    ],
+    "instances": [
+      "DamagedCondition",
+      "NewCondition",
+      "RefurbishedCondition",
+      "UsedCondition"
     ]
   },
   {
