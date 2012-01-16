@@ -1,5 +1,5 @@
-require 'mida/datatype'
-require 'mida/datatype/url'
+require 'mida_vocabulary/datatype'
+require 'mida_vocabulary/datatype/url'
 
 describe Mida::DataType::Enumeration do
   before :all do

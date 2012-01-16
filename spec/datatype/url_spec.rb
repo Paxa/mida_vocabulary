@@ -1,4 +1,4 @@
-require 'mida/datatype'
+require 'mida_vocabulary/datatype'
 require 'yaml'
 
 describe Mida::DataType::URL do

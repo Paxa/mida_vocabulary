@@ -1,4 +1,4 @@
-require 'mida/datatype'
+require 'mida_vocabulary/datatype'
 
 describe Mida::DataType::Integer do
 

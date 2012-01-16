@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'mida/propertydesc'
+require 'mida_vocabulary/propertydesc'
 
 describe Mida::PropertyDesc, 'when initialized without a block' do
   before do

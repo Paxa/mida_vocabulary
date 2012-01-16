@@ -8,7 +8,7 @@ require 'json'
 require 'set'
 
 ENUMERATION_TEMPLATE = <<-EOB
-require 'mida/datatype'
+require 'mida_vocabulary/datatype'
 
 module Mida
   module SchemaOrg
@@ -29,13 +29,13 @@ end
 EOB
 
 VOCABULARY_TEMPLATE = <<-EOB
-require 'mida/vocabulary'
+require 'mida_vocabulary/vocabulary'
 
 module Mida
   module SchemaOrg
 
 % type.types_used.each do |klass|
-    autoload :<%= klass %>, 'mida/vocabularies/schemaorg/<%= klass.downcase %>'
+    autoload :<%= klass %>, 'mida_vocabulary/vocabularies/schemaorg/<%= klass.downcase %>'
 % end
 
     # <%= type.description %>
@@ -141,7 +141,7 @@ class Type
   def get_requires(vocabulary)
     types = types_used(vocabulary)
     types.collect do |type|
-      "mida/vocabularies/schemaorg/#{type.name.downcase}"
+      "mida_vocabulary/vocabularies/schemaorg/#{type.name.downcase}"
     end
   end
 

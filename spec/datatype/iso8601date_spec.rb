@@ -1,4 +1,4 @@
-require 'mida/datatype'
+require 'mida_vocabulary/datatype'
 
 describe Mida::DataType::ISO8601Date do
 
@@ -9,7 +9,7 @@ describe Mida::DataType::ISO8601Date do
 
   it '#parse should raise an exception if value is empty' do
     test = lambda {Mida::DataType::ISO8601Date.parse('')}
-    test.should raise_error(RUBY_VERSION =~ /1.9.2/ ? ArgumentError : TypeError)
+    test.should raise_error(ArgumentError)
   end
 
   context 'when passed a valid date' do
