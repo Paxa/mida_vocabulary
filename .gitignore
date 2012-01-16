@@ -1,0 +1,6 @@
+# vi swap files
+*.swp
+
+# Gem pkg directory
+pkg/
+.rvmrc

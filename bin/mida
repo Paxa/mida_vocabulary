@@ -1,0 +1,123 @@
+#!/usr/bin/env ruby
+## Mida: Microdata parser/extractor
+##
+## Usage: mida [options...] [sources...]
+##
+## Find the Microdata in the given 'sources', which can be urls or files.
+## Urls must be prefixed with: http://
+##
+
+require 'open-uri'
+require 'yaml'
+require 'optparse'
+
+# Displays comment at top of file
+def banner
+  File.readlines(__FILE__).
+  grep(/^##.*/).
+  map { |line| line.chomp[3..-1] }.
+  join("\n")+"\n"+"  Options:\n"
+end
+
+begin
+  require 'mida'
+rescue LoadError
+  raise if $!.to_s !~ /mida/
+  libdir = File.expand_path("../../lib", __FILE__).sub(/^#{Dir.pwd}/, '.')
+  if !$:.include?(libdir)
+    warn "warn: #{$!.to_s}. trying again with #{libdir} on load path."
+    $:.unshift libdir
+    retry
+  end
+  raise
+end
+
+# Turn off validation by unregistering all the vocabularies apart from
+# GenericVocabulary
+def turnOffValidation
+  Mida::Vocabulary.vocabularies.each do |vocabulary|
+    unless vocabulary == Mida::GenericVocabulary
+      Mida::Vocabulary.unregister(vocabulary)
+    end
+  end
+end
+
+options = {sourcename: true}
+ARGV.options do |option|
+  option.banner = banner
+  option.on('-c','--count', 'Display the counts of each Microdata Type') do
+    options[:count] = true
+  end
+  option.on('-n','--no-sourcename', "Don't display the source name") do
+    options[:sourcename] = false
+  end
+  option.on('-t','--type TYPE', Regexp,
+            'A regexp to match the itemtypes against') do |type|
+    options[:type] = type
+  end
+  option.on('-v','--no-validate',
+            "Don't validate the items against known Vocabularies") do
+    turnOffValidation
+  end
+  option.on_tail('-h','--help', 'This help message') {puts option; exit}
+
+  begin
+    option.parse!
+  rescue OptionParser::InvalidOption => error
+    puts "#{error.to_s.capitalize}\n#{option}"; exit
+  end
+  if ARGV.empty? then puts option; exit end
+end
+
+# Get the url from the source if there is one
+def get_url
+  ARGV.first =~ %r{^http://.*} ? ARGV.first : nil
+end
+
+# Display each item as yaml
+def display_items(items)
+  items.each {|item| puts item.to_h.to_yaml} 
+end
+
+# Returns a hash {type => count}
+def count_types(types)
+  types.each_with_object(Hash.new(0)) {|type,count| count[type] += 1}
+end
+
+# Display the number of each type of item
+def display_count(items)
+  types = items.collect {|item| item.type}
+  count_types(types).each {|type, count| puts "Found #{count} #{type}"}
+end
+
+def parse_source(source, options)
+  url = get_url  
+  open(source) do |f|
+    doc = Mida::Document.new(f, url)
+    items = if options[:type]
+      doc.search(options[:type])
+    else
+      doc.items
+    end
+
+    if items.empty?
+      puts "No microdata found in this document."; exit
+    else
+      if options.include?(:count)
+        display_count(items)
+      else
+        display_items(items)
+      end
+    end
+  end
+rescue => e
+  puts "Failed to parse: #{source}"
+  puts "Error: #{e.to_s}"
+  exit
+end
+
+ARGV.each do |source|
+  puts "Parsing: #{source}" if options[:sourcename]
+  parse_source(source, options)
+  puts
+end  
