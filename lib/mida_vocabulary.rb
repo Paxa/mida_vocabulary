@@ -8,3 +8,4 @@ end
 
 require 'mida_vocabulary/vocabularies/genericvocabulary'
 require 'mida_vocabulary/vocabularies/schemaorg'
+require 'mida_vocabulary/vocabularies/data_vocabulary'
