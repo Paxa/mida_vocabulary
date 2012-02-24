@@ -4,6 +4,8 @@ require 'mida_vocabulary/vocabularies/data_vocabulary/item'
 module Mida
   module DataVocabulary
     autoload :Organization, 'mida_vocabulary/vocabularies/data_vocabulary/organization'
+    autoload :Offer, 'mida_vocabulary/vocabularies/data_vocabulary/offer'
+    autoload :OfferAggregate, 'mida_vocabulary/vocabularies/data_vocabulary/offer_aggregate'
 
     class Product < Mida::Vocabulary
       itemtype %r{http://data-vocabulary.org/Product}i

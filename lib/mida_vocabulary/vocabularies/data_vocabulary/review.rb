@@ -4,6 +4,7 @@ require 'mida_vocabulary/vocabularies/data_vocabulary/item'
 module Mida
   module DataVocabulary
     autoload :Organization, 'mida_vocabulary/vocabularies/data_vocabulary/organization'
+    autoload :Person, 'mida_vocabulary/vocabularies/data_vocabulary/person'
     
     class Review < Mida::Vocabulary
       itemtype %r{http://data-vocabulary.org/Review}i
