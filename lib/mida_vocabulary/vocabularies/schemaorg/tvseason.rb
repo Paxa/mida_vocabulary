@@ -3,55 +3,16 @@ require 'mida_vocabulary/vocabulary'
 module Mida
   module SchemaOrg
 
-    autoload :Thing, 'mida_vocabulary/vocabularies/schemaorg/thing'
+    autoload :Season, 'mida_vocabulary/vocabularies/schemaorg/season'
     autoload :CreativeWork, 'mida_vocabulary/vocabularies/schemaorg/creativework'
-    autoload :TVEpisode, 'mida_vocabulary/vocabularies/schemaorg/tvepisode'
-    autoload :TVSeries, 'mida_vocabulary/vocabularies/schemaorg/tvseries'
-    autoload :VideoObject, 'mida_vocabulary/vocabularies/schemaorg/videoobject'
+    autoload :Thing, 'mida_vocabulary/vocabularies/schemaorg/thing'
 
-    # A TV season.
+    # Season dedicated to TV broadcast and associated online delivery.
     class TVSeason < Mida::Vocabulary
       itemtype %r{http://schema.org/TVSeason}i
-      include_vocabulary Mida::SchemaOrg::Thing
+      include_vocabulary Mida::SchemaOrg::Season
       include_vocabulary Mida::SchemaOrg::CreativeWork
-
-      # The end date and time of the event (in ISO 8601 date format).
-      has_many 'endDate' do
-        extract Mida::DataType::ISO8601Date
-      end
-
-      # The episode of a TV series or season.
-      has_many 'episodes' do
-        extract Mida::SchemaOrg::TVEpisode
-        extract Mida::DataType::Text
-      end
-
-      # The number of episodes in this season or series.
-      has_many 'numberOfEpisodes' do
-        extract Mida::DataType::Number
-      end
-
-      # The TV series to which this episode or season belongs.
-      has_many 'partOfTVSeries' do
-        extract Mida::SchemaOrg::TVSeries
-        extract Mida::DataType::Text
-      end
-
-      # The season number.
-      has_many 'seasonNumber' do
-        extract Mida::DataType::Integer
-      end
-
-      # The start date and time of the event (in ISO 8601 date format).
-      has_many 'startDate' do
-        extract Mida::DataType::ISO8601Date
-      end
-
-      # The trailer of the movie or TV series, season, or episode.
-      has_many 'trailer' do
-        extract Mida::SchemaOrg::VideoObject
-        extract Mida::DataType::Text
-      end
+      include_vocabulary Mida::SchemaOrg::Thing
     end
 
   end

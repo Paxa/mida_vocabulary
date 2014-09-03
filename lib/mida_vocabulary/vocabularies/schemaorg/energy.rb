@@ -5,7 +5,7 @@ module Mida
 
     autoload :Thing, 'mida_vocabulary/vocabularies/schemaorg/thing'
 
-    # Properties that take Enerygy as values are of the form '<Number> <Energy unit of measure>'
+    # Properties that take Energy as values are of the form '<Number> <Energy unit of measure>'
     class Energy < Mida::Vocabulary
       itemtype %r{http://schema.org/Energy}i
       include_vocabulary Mida::SchemaOrg::Thing

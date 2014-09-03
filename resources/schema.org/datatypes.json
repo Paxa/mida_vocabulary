@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Boolean",
+    "description": "",
+    "ancestors": [
+      "DataType"
+    ]
+  },
+  {
+    "name": "DataType",
+    "description": ""
+  },
+  {
+    "name": "Date",
+    "description": "",
+    "ancestors": [
+      "DataType"
+    ]
+  },
+  {
+    "name": "DateTime",
+    "description": "",
+    "ancestors": [
+      "DataType"
+    ]
+  },
+  {
+    "name": "Float",
+    "description": "",
+    "ancestors": [
+      "DataType",
+      "Number"
+    ]
+  },
+  {
+    "name": "Integer",
+    "description": "",
+    "ancestors": [
+      "DataType",
+      "Number"
+    ]
+  },
+  {
+    "name": "Number",
+    "description": "",
+    "ancestors": [
+      "DataType"
+    ]
+  },
+  {
+    "name": "Text",
+    "description": "",
+    "ancestors": [
+      "DataType"
+    ]
+  },
+  {
+    "name": "Time",
+    "description": "",
+    "ancestors": [
+      "DataType"
+    ]
+  },
+  {
+    "name": "URL",
+    "description": "",
+    "ancestors": [
+      "DataType",
+      "Text"
+    ]
+  }
+]

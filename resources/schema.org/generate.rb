@@ -16,7 +16,7 @@ module Mida
     # <%= type.description %>
     class <%= type.name %> < Mida::DataType::Enumeration
       VALID_VALUES = [
-% num_instances = type.instances.size
+% num_instances = type.instances.size == 0 ? 1 : type.instances.size
 % type.instances.first(num_instances-1).each do |instance|
         [::Mida::DataType::URL, %r{http://schema.org/<%= instance %>}i],
 % end
@@ -170,7 +170,7 @@ class Type
   end
 end
 
-types = JSON.parse(File.read('vocabularies.json'))
+types = JSON.parse(File.open('vocabularies.json', 'r:utf-8', &:read))
 types = types.collect {|type| Type.new(type)}
 datatypes = DATATYPES.collect {|type| Type.new(type)}
 types.each {|type| type.process_properties}
