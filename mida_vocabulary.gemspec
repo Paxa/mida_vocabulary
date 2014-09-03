@@ -12,6 +12,6 @@ Gem::Specification.new do |s|
   s.executables = []
   s.extra_rdoc_files = ['README.md']
   s.add_dependency('blankslate')
-  s.add_development_dependency('rspec', '~> 2.7.0' )
+  s.add_development_dependency('rspec', '~> 2.14.1' )
   s.add_development_dependency('bundler')
 end

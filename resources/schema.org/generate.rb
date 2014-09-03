@@ -178,6 +178,7 @@ types.each {|type| type.process_properties}
 Dir.mkdir('enumerations') unless File.directory?('enumerations')
 Dir.mkdir('vocabularies') unless File.directory?('vocabularies')
 
+all_classes = []
 types.each do |type|
   if type.enumeration?
     File.open("enumerations/#{type.name.downcase}.rb", 'w') do |file|
@@ -188,4 +189,7 @@ types.each do |type|
       file.puts ERB.new(VOCABULARY_TEMPLATE, 0, '%').result(binding)
     end
   end
+  all_classes << type.name
 end
+
+p all_classes

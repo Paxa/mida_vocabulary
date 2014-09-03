@@ -1,4 +1,5 @@
 require 'mida_vocabulary/vocabulary'
+require 'mida_vocabulary/vocabularies/schemaorg/creativework'
 
 module Mida
   module SchemaOrg
