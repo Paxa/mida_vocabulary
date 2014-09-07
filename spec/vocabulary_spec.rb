@@ -110,8 +110,10 @@ describe Mida::Vocabulary, 'when subclassed' do
   before do
     # Make sure the class is redefined afresh to make sure that
     # inherited() hook is called
-    Mida::Vocabulary.unregister(Person)
-    Object.send(:remove_const, :Person)
+    if defined?(Person)
+      Mida::Vocabulary.unregister(Person)
+      Object.send(:remove_const, :Person)
+    end
 
     class Person < Mida::Vocabulary
       itemtype %r{http://example.com/vocab/person}

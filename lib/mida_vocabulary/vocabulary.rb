@@ -1,4 +1,5 @@
 require 'set'
+require 'uri'
 module Mida
 
   # Class used to describe a vocabulary
@@ -27,14 +28,57 @@ module Mida
 
     # Find the last vocabulary registered that matches the itemtype
     def self.find(itemtype)
-      @vocabularies.sort_by {|v| v.itemtype ? v.itemtype.source.size : 0 }.reverse.each do |vocabulary|
-        if ((itemtype || "") =~ vocabulary.itemtype)
-          return vocabulary
+      if const = try_load_const(itemtype)
+        return const
+      else
+        @vocabularies.sort_by {|v| v.itemtype ? v.itemtype.source.size : 0 }.reverse.each do |vocabulary|
+          if ((itemtype || "") =~ vocabulary.itemtype)
+            return vocabulary
+          end
         end
       end
       nil
     end
-    
+
+    # It convert name to const name and try to find it in autload directory
+    def self.try_load_const(item_type)
+      # http://schema.org/Winery => winery
+      # http://schema.org/AutomotiveBusiness => automotivebusiness
+      # http://data-vocabulary.org/Offer-aggregate/ => offeraggregate
+
+      if item_type =~ /https?:\/\//
+        uri = URI.parse(item_type)
+        if uri.host != 'schema.org' && uri.host != 'data-vocabulary.org'
+          return nil
+        end
+        item_type = uri.path.gsub('/', '').gsub('-', '')
+      end
+      constName = camel_case(item_type)
+
+      if Mida::SchemaOrg.const_defined?(constName, false)
+        return Mida::SchemaOrg.const_get(constName, false)
+      end
+
+      if Mida::DataVocabulary.const_defined?(constName, false)
+        return Mida::DataVocabulary.const_get(constName, false)
+      end
+
+      load_path = File.dirname(__FILE__) + "/vocabularies/schemaorg/#{constName.downcase}.rb"
+      if File.exist?(load_path)
+        return Mida::SchemaOrg.const_get(constName) # hit autoloader
+      end
+
+      load_path = File.dirname(__FILE__) + "/vocabularies/data_vocabulary/#{constName.downcase}.rb"
+      if File.exist?(load_path)
+        return Mida::DataVocabulary.const_get(constName) # hit autoloader
+      end
+    end
+
+    def self.camel_case(string)
+      return string if string !~ /_/ && string =~ /[A-Z]+.*/
+      string.split('_').map {|e| e.capitalize }.join
+    end
+
     def self.inherited(subclass)
       register(subclass)
     end

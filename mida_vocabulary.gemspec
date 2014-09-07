@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name        = "mida_vocabulary"
   s.summary     = "Microdata vocabularies for mida parser/extractor library"
   s.description = "Microdata schema.org vocabularies"
-  s.version     = "0.2"
+  s.version     = "0.2.1"
   s.author      = "Pavel Evstigneev"
   s.email       = "pavel.evst@gmail.com"
   s.homepage    = %q{http://github.com/Paxa/mida_vocabulary}
