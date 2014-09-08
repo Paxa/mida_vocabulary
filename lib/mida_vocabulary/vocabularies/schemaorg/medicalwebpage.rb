@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::WebPage
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # An aspect of medical practice that is considered on the page, such as 'diagnosis', 'treatment', 'causes', 'prognosis', 'etiology', 'epidemiology', etc.
+      has_many 'aspect'
     end
 
   end

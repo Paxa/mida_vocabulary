@@ -13,6 +13,16 @@ module Mida
       include_vocabulary Mida::SchemaOrg::PeopleAudience
       include_vocabulary Mida::SchemaOrg::Audience
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # Maximal age of the child
+      has_many 'childMaxAge' do
+        extract Mida::DataType::Number
+      end
+
+      # Minimal age of the child
+      has_many 'childMinAge' do
+        extract Mida::DataType::Number
+      end
     end
 
   end

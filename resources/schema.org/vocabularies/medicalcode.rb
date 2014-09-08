@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/MedicalCode}i
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The actual code.
+      has_many 'codeValue'
+
+      # The coding system, e.g. 'ICD-10'.
+      has_many 'codingSystem'
     end
 
   end

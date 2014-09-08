@@ -65,12 +65,12 @@ module Mida
 
       load_path = File.dirname(__FILE__) + "/vocabularies/schemaorg/#{constName.downcase}.rb"
       if File.exist?(load_path)
-        return Mida::SchemaOrg.const_get(constName) # hit autoloader
+        return Mida::SchemaOrg.const_get(constName, false) # hit autoloader
       end
 
       load_path = File.dirname(__FILE__) + "/vocabularies/data_vocabulary/#{constName.downcase}.rb"
       if File.exist?(load_path)
-        return Mida::DataVocabulary.const_get(constName) # hit autoloader
+        return Mida::DataVocabulary.const_get(constName, false) # hit autoloader
       end
     end
 

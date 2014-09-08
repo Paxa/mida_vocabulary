@@ -13,6 +13,12 @@ module Mida
       include_vocabulary Mida::SchemaOrg::MedicalTest
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # A component test of the panel.
+      has_many 'subTest' do
+        extract Mida::SchemaOrg::MedicalTest
+        extract Mida::DataType::Text
+      end
     end
 
   end

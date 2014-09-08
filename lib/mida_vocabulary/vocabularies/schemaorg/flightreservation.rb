@@ -11,6 +11,9 @@ module Mida
       itemtype %r{http://schema.org/FlightReservation}i
       include_vocabulary Mida::SchemaOrg::Reservation
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The airline-specific indicator of boarding order / preference.
+      has_many 'boardingGroup'
     end
 
   end

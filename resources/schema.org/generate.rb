@@ -65,12 +65,15 @@ EOB
 
 DATATYPES = [
   {'name' => 'Boolean', 'full_name' => 'Mida::DataType::Boolean'},
+  {'name' => 'DataType', 'full_name' => 'Mida::DataType::Text'}, # TODO
+  {'name' => 'DateTime', 'full_name' => 'Mida::DataType::ISO8601Date'},
   {'name' => 'Date', 'full_name' => 'Mida::DataType::ISO8601Date'},
   {'name' => 'Float', 'full_name' => 'Mida::DataType::Float'},
   {'name' => 'Integer', 'full_name' => 'Mida::DataType::Integer'},
   {'name' => 'Number', 'full_name' => 'Mida::DataType::Number'},
   {'name' => 'URL', 'full_name' => 'Mida::DataType::URL'},
   {'name' => 'Text', 'full_name' => 'Mida::DataType::Text'},
+  {'name' => 'Time', 'full_name' => 'Mida::DataType::Time'}, # TODO
 ]
 
 class Property
@@ -80,13 +83,18 @@ class Property
   def initialize(name, description, types)
     @name = name
     @description = description
-    @types = (types || []).collect {|type| Type.find(type)}.sort
+    @types = (types || []).collect {|type|
+      if found = Type.find(type)
+        found
+      else
+        puts "Unknown type #{type}"
+      end
+    }.sort.compact
     add_text_type(@types)
   end
 
   def add_text_type(types)
-    if types.any? {|type| type.vocabulary?} &&
-       types.none? {|type| type.name == 'Text'}
+    if types.any? {|type| type.vocabulary? } && types.none? {|type| type.name == 'Text'}
       @types << Type.find('Text')
     end
   end
@@ -108,6 +116,8 @@ class Type
     @instances = definition['instances'] || []
     @full_name = definition['full_name'] || "Mida::SchemaOrg::#{@name}"
     (@@types ||= []) << self
+    @properties.select! {|prop| prop['name'] != '' }
+    #p [@name, @properties]
   end
 
   # Returns the found type or nil of not found
@@ -192,4 +202,4 @@ types.each do |type|
   all_classes << type.name
 end
 
-p all_classes
+#p all_classes

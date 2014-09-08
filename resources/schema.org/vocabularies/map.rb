@@ -11,6 +11,10 @@ module Mida
       itemtype %r{http://schema.org/Map}i
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # Indicates the kind of Map, from the MapCategoryType Enumeration.
+      has_many 'mapType' do
+      end
     end
 
   end

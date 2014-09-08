@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/UpdateAction}i
       include_vocabulary Mida::SchemaOrg::Action
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # A sub property of object. The collection target of the action.
+      has_many 'collection' do
+        extract Mida::SchemaOrg::Thing
+        extract Mida::DataType::Text
+      end
     end
 
   end

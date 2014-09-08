@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::SoftwareApplication
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # Specifies browser requirements in human-readable text. For example,"requires HTML5 support".
+      has_many 'browserRequirements'
     end
 
   end

@@ -11,6 +11,9 @@ module Mida
       itemtype %r{http://schema.org/Airline}i
       include_vocabulary Mida::SchemaOrg::Organization
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # IATA identifier for an airline or airport
+      has_many 'iataCode'
     end
 
   end

@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/ReservationPackage}i
       include_vocabulary Mida::SchemaOrg::Reservation
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The individual reservations included in the package. Typically a repeated property.
+      has_many 'subReservation' do
+        extract Mida::SchemaOrg::Reservation
+        extract Mida::DataType::Text
+      end
     end
 
   end

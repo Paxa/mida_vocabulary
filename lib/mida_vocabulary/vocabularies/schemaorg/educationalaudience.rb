@@ -11,6 +11,9 @@ module Mida
       itemtype %r{http://schema.org/EducationalAudience}i
       include_vocabulary Mida::SchemaOrg::Audience
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # An educationalRole of an EducationalAudience
+      has_many 'educationalRole'
     end
 
   end

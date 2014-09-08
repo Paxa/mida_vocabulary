@@ -11,6 +11,11 @@ module Mida
       itemtype %r{http://schema.org/PlanAction}i
       include_vocabulary Mida::SchemaOrg::Action
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The time the object is scheduled to.
+      has_many 'scheduledTime' do
+        extract Mida::DataType::ISO8601Date
+      end
     end
 
   end

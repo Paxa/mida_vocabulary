@@ -13,6 +13,15 @@ module Mida
       include_vocabulary Mida::SchemaOrg::AnatomicalStructure
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The biomechanical properties of the bone.
+      has_many 'biomechnicalClass'
+
+      # The degree of mobility the joint allows.
+      has_many 'functionalClass'
+
+      # The name given to how bone physically connects to each other.
+      has_many 'structuralClass'
     end
 
   end

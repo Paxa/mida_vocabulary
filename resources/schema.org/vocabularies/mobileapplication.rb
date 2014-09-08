@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::SoftwareApplication
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # Specifies specific carrier(s) requirements for the application (e.g. an application may only work on a specific carrier network).
+      has_many 'carrierRequirements'
     end
 
   end

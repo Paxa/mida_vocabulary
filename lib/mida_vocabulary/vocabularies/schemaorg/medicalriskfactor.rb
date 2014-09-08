@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/MedicalRiskFactor}i
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The condition, complication, etc. influenced by this factor.
+      has_many 'increasesRiskOf' do
+        extract Mida::SchemaOrg::MedicalEntity
+        extract Mida::DataType::Text
+      end
     end
 
   end

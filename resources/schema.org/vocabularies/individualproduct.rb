@@ -11,6 +11,9 @@ module Mida
       itemtype %r{http://schema.org/IndividualProduct}i
       include_vocabulary Mida::SchemaOrg::Product
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.
+      has_many 'serialNumber'
     end
 
   end

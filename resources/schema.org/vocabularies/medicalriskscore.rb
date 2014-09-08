@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::MedicalRiskEstimator
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The algorithm or rules to follow to compute the score.
+      has_many 'algorithm'
     end
 
   end

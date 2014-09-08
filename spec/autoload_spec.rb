@@ -1,13 +1,21 @@
+require 'json'
 require 'spec_helper'
 require 'mida_vocabulary'
 
 describe Mida::Vocabulary, 'auto loading' do
+  before do
+    Mida::SchemaOrg.forget_all!
+  end
+  after :all do
+    Mida::SchemaOrg.forget_all!
+  end
+
   it "should load class" do
     before_hit = $LOADED_FEATURES.dup
 
-    Mida::SchemaOrg.const_defined?(:Airline).should == false
+    Mida::SchemaOrg.const_defined?(:Airline, false).should == false
     Mida::SchemaOrg::Airline
-    Mida::SchemaOrg.const_defined?(:Airline).should == true
+    Mida::SchemaOrg.const_defined?(:Airline, false).should == true
 
     ($LOADED_FEATURES - before_hit).size.should > 0
   end
@@ -33,8 +41,21 @@ describe Mida::Vocabulary, 'auto loading' do
       Set.new([Mida::SchemaOrg::Thing, Mida::SchemaOrg::CreativeWork, Mida::SchemaOrg::Article])
 
     props = Mida::SchemaOrg::BlogPosting.properties.keys
-    props.should =~ ['articleBody']
-    props.should =~ ['additionalType']
-    props.should =~ ['accessibilityAPI']
+    props.should include('articleBody')
+    props.should include('additionalType')
+    props.should include('accessibilityAPI')
+  end
+
+  # Load every class an hit autoloader
+  it "should load every file" do
+    types = JSON.parse(File.open(File.dirname(__FILE__) + '/../resources/schema.org/vocabularies.json', 'r:utf-8', &:read))
+    types.each do |type|
+      next if type['name'] == 'Class'
+      klass = Mida::SchemaOrg.const_get(type['name'], false)
+      klass.is_a?(Class).should == true
+
+      Mida::SchemaOrg.constants.should include(type['name'].to_sym)
+      klass.to_s.should == "Mida::SchemaOrg::#{type['name']}"
+    end
   end
 end

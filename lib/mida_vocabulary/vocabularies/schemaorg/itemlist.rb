@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/ItemList}i
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # A single list item.
+      has_many 'itemListElement'
+
+      # Type of ordering (e.g. Ascending, Descending, Unordered).
+      has_many 'itemListOrder'
     end
 
   end

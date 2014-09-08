@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/TradeAction}i
       include_vocabulary Mida::SchemaOrg::Action
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes.
+      has_many 'price' do
+        extract Mida::DataType::Number
+        extract Mida::DataType::Text
+      end
     end
 
   end

@@ -13,6 +13,18 @@ module Mida
       include_vocabulary Mida::SchemaOrg::UpdateAction
       include_vocabulary Mida::SchemaOrg::Action
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # A sub property of object. The object that is being replaced.
+      has_many 'replacee' do
+        extract Mida::SchemaOrg::Thing
+        extract Mida::DataType::Text
+      end
+
+      # A sub property of object. The object that replaces.
+      has_many 'replacer' do
+        extract Mida::SchemaOrg::Thing
+        extract Mida::DataType::Text
+      end
     end
 
   end

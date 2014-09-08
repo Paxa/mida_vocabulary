@@ -15,6 +15,18 @@ module Mida
       include_vocabulary Mida::SchemaOrg::Article
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # Library file name e.g., mscorlib.dll, system.web.dll
+      has_many 'assembly'
+
+      # Associated product/technology version. e.g., .NET Framework 4.5
+      has_many 'assemblyVersion'
+
+      # Indicates whether API is managed or unmanaged.
+      has_many 'programmingModel'
+
+      # Type of app development: phone, Metro style, desktop, XBox, etc.
+      has_many 'targetPlatform'
     end
 
   end

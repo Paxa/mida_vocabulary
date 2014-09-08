@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::CommunicateAction
       include_vocabulary Mida::SchemaOrg::Action
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # A sub property of object. A question.
+      has_many 'question'
     end
 
   end

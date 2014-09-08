@@ -13,6 +13,12 @@ module Mida
       include_vocabulary Mida::SchemaOrg::CivicStructure
       include_vocabulary Mida::SchemaOrg::Place
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # IATA identifier for an airline or airport
+      has_many 'iataCode'
+
+      # IACO identifier for an airport.
+      has_many 'icaoCode'
     end
 
   end

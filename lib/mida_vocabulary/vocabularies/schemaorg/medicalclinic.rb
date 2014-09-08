@@ -7,6 +7,10 @@ module Mida
     autoload :Organization, 'mida_vocabulary/vocabularies/schemaorg/organization'
     autoload :Thing, 'mida_vocabulary/vocabularies/schemaorg/thing'
     autoload :Place, 'mida_vocabulary/vocabularies/schemaorg/place'
+    autoload :MedicalProcedure, 'mida_vocabulary/vocabularies/schemaorg/medicalprocedure'
+    autoload :MedicalTest, 'mida_vocabulary/vocabularies/schemaorg/medicaltest'
+    autoload :MedicalTherapy, 'mida_vocabulary/vocabularies/schemaorg/medicaltherapy'
+    autoload :MedicalSpecialty, 'mida_vocabulary/vocabularies/schemaorg/medicalspecialty'
 
     # A medical clinic.
     class MedicalClinic < Mida::Vocabulary
@@ -15,6 +19,19 @@ module Mida
       include_vocabulary Mida::SchemaOrg::Organization
       include_vocabulary Mida::SchemaOrg::Thing
       include_vocabulary Mida::SchemaOrg::Place
+
+      # A medical service available from this provider.
+      has_many 'availableService' do
+        extract Mida::SchemaOrg::MedicalProcedure
+        extract Mida::SchemaOrg::MedicalTest
+        extract Mida::SchemaOrg::MedicalTherapy
+        extract Mida::DataType::Text
+      end
+
+      # A medical specialty of the provider.
+      has_many 'medicalSpecialty' do
+        extract Mida::SchemaOrg::MedicalSpecialty
+      end
     end
 
   end

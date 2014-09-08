@@ -16,3 +16,6 @@ def last_stderr
   $stderr = orig_stderr
   message
 end
+
+class Airport
+end

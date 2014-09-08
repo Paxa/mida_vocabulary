@@ -11,6 +11,9 @@ module Mida
       itemtype %r{http://schema.org/Periodical}i
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The International Standard Serial Number (ISSN) that identifies this periodical. You can repeat this property to (for example) identify different formats of this periodical.
+      has_many 'issn'
     end
 
   end

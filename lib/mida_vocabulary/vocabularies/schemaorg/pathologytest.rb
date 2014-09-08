@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::MedicalTest
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The type of tissue sample required for the test.
+      has_many 'tissueSample'
     end
 
   end

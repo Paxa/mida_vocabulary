@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/ChooseAction}i
       include_vocabulary Mida::SchemaOrg::Action
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # A sub property of object. The options subject to this action.
+      has_many 'option' do
+        extract Mida::SchemaOrg::Thing
+        extract Mida::DataType::Text
+      end
     end
 
   end

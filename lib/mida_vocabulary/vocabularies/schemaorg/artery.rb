@@ -13,6 +13,24 @@ module Mida
       include_vocabulary Mida::SchemaOrg::AnatomicalStructure
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The branches that comprise the arterial structure.
+      has_many 'arterialBranch' do
+        extract Mida::SchemaOrg::AnatomicalStructure
+        extract Mida::DataType::Text
+      end
+
+      # The anatomical or organ system that the artery originates from.
+      has_many 'source' do
+        extract Mida::SchemaOrg::AnatomicalStructure
+        extract Mida::DataType::Text
+      end
+
+      # The area to which the artery supplies blood.
+      has_many 'supplyTo' do
+        extract Mida::SchemaOrg::AnatomicalStructure
+        extract Mida::DataType::Text
+      end
     end
 
   end

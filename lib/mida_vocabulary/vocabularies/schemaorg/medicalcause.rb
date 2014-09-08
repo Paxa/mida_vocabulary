@@ -11,6 +11,12 @@ module Mida
       itemtype %r{http://schema.org/MedicalCause}i
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The condition, complication, symptom, sign, etc. caused.
+      has_many 'causeOf' do
+        extract Mida::SchemaOrg::MedicalEntity
+        extract Mida::DataType::Text
+      end
     end
 
   end

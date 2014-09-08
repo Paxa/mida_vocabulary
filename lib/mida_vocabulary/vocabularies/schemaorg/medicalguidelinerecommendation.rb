@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::MedicalGuideline
       include_vocabulary Mida::SchemaOrg::MedicalEntity
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # Strength of the guideline's recommendation (e.g. 'class I').
+      has_many 'recommendationStrength'
     end
 
   end

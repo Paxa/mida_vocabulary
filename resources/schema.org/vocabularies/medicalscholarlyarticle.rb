@@ -13,6 +13,9 @@ module Mida
       include_vocabulary Mida::SchemaOrg::Article
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # The type of the medical article, taken from the US NLM MeSH publication type catalog.
+      has_many 'publicationType'
     end
 
   end

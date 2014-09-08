@@ -13,6 +13,12 @@ module Mida
       include_vocabulary Mida::SchemaOrg::Article
       include_vocabulary Mida::SchemaOrg::CreativeWork
       include_vocabulary Mida::SchemaOrg::Thing
+
+      # Prerequisites needed to fulfill steps in article.
+      has_many 'dependencies'
+
+      # Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
+      has_many 'proficiencyLevel'
     end
 
   end
