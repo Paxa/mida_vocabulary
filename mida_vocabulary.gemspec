@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.platform    = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.9'
-  s.files       = `git ls-files`.split("\n")
+  s.files       = `git ls-files`.split("\n").reject {|f| f.start_with?("resources") }
   s.executables = []
   s.extra_rdoc_files = ['README.md']
 

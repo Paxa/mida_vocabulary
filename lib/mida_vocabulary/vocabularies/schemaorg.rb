@@ -2,7 +2,6 @@ module Mida
   module SchemaOrg
     def self.const_missing(name)
       filename = File.dirname(__FILE__) + "/schemaorg/#{name.to_s.downcase}.rb"
-      #puts "Const missing #{name} #{filename}"
 
       require filename
       load filename unless self.const_defined?(name, false)
